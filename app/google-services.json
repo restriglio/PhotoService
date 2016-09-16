@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "59435417196",
+    "firebase_url": "https://photoservice-d68ad.firebaseio.com",
+    "project_id": "photoservice-d68ad",
+    "storage_bucket": "photoservice-d68ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59435417196:android:f0cf2203cb0ee086",
+        "android_client_info": {
+          "package_name": "rs.poc.com.photoservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59435417196-qa3k54vi8vq1ri4ipmpaiq24tmkjl37s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rs.poc.com.photoservice",
+            "certificate_hash": "144DF419529403A2768C7C855E7886D462B80469"
+          }
+        },
+        {
+          "client_id": "59435417196-h13lhrbc102cmf4tavmel7hb81vl96kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC10TU5s0mGqu-CHzFXl--qNXjfwJ-T5SI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59435417196-h13lhrbc102cmf4tavmel7hb81vl96kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
