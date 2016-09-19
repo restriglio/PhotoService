@@ -52,6 +52,52 @@ public class MainActivity extends AppCompatActivity {
             return;
         } else {
            //blah!
+
+            try {
+                uploadFromLocalFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
+
+
+    private void uploadFromLocalFile() throws IOException {
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://photoservice-d68ad.appspot.com/images");
+
+        StorageReference mountainsRef = storageRef.child("image2.jpg");
+
+        InputStream bitmap = null;
+        bitmap = getAssets().open("image2.jpg");
+        Bitmap bit = BitmapFactory.decodeStream(bitmap);
+
+        ImageView imageView = (ImageView)findViewById(R.id.imageView);
+        imageView.setImageDrawable(new BitmapDrawable(getResources(), bit));
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bit.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        InputStream is = new ByteArrayInputStream(stream.toByteArray());
+
+        UploadTask uploadTask = storageRef.putStream(is);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+                Log.d("","");
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+            }
+        });
+
+
+    }
+
 }

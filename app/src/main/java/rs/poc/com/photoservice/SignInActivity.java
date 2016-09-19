@@ -104,55 +104,11 @@ public class SignInActivity extends AppCompatActivity implements
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-
-                try {
-                    uploadFromLocalFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
             } else {
                 // Google Sign In failed
                 Log.e(TAG, "Google Sign In failed.");
             }
         }
-    }
-
-    private void uploadFromLocalFile() throws IOException {
-
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://photoservice-d68ad.appspot.com/images/");
-
-        StorageReference mountainsRef = storageRef.child("image.jpg");
-
-
-        InputStream bitmap = null;
-        bitmap = getAssets().open("image.jpg");
-        Bitmap bit = BitmapFactory.decodeStream(bitmap);
-
-        ImageView imageView = (ImageView)findViewById(R.id.imageView);
-        imageView.setImageDrawable(new BitmapDrawable(getResources(), bit));
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bit.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        InputStream is = new ByteArrayInputStream(stream.toByteArray());
-
-        UploadTask uploadTask = storageRef.putStream(is);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-                Log.d("","");
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
-            }
-        });
-
-
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
